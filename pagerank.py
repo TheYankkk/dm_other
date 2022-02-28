@@ -1,7 +1,7 @@
 from numpy import *
 #
 #构造转移矩阵a = array([[0,0,0,1],[0.5,0,0,0],[1/2,1,0,0],[0,0,1,0]],dtype=float)
-a = array([[1/2,1/2,0],[1/2,0,1],[0,1/2,0]],dtype=float)
+a = array([[0,1/2,1],[1,0,0],[0,1/2,0]],dtype=float)
 def transPre(data):
     b = transpose(data) #把矩阵转置
     c = zeros((a.shape),dtype=float)
