@@ -4,9 +4,8 @@ import math
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
-data=pd.read_csv(r"mammographic_masses.csv",delimiter=",",header=0)
-#print(data)
-d=data.values.tolist()
+d=[["a"],["a","b"],["b","c"],["a","b","d"]]
+"""
 for each in range(len(d)):
     d[each][0]="BI-RADS:"+d[each][0]
     d[each][1] = "Age:" + d[each][1]
@@ -15,6 +14,7 @@ for each in range(len(d)):
     d[each][4] = "Density:" + d[each][4]
     d[each][-1]="Severity:"+str(d[each][-1])
 #print(d)
+"""
 te = TransactionEncoder()
 te_ary = te.fit(d).transform(d)
 #print(te.columns_)
@@ -28,7 +28,7 @@ a=association_rules(frequent_itemsets, metric="confidence", min_threshold=0.9)
 
 #visualizing association rules results
 print(a[["antecedents","consequents","support","confidence"]])
-
+"""
 #Question 2
 dnew=[]
 for each in range(len(d)):
@@ -103,3 +103,4 @@ df = pd.DataFrame(te_ary,columns=te.columns_)
 frequent_itemsets = apriori(df, min_support=0.1, use_colnames=True)
 a=association_rules(frequent_itemsets, metric="confidence", min_threshold=0.9)
 print(a[["antecedents","consequents","support","confidence"]])
+"""
