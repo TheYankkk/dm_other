@@ -4,7 +4,7 @@ import math
 from mlxtend.preprocessing import TransactionEncoder
 from mlxtend.frequent_patterns import apriori
 from mlxtend.frequent_patterns import association_rules
-d=[["a"],["a","b"],["b","c"],["a","b","d"]]
+d=[["a","b","c","d"],["a","b","d",'e'],["d","c"],["a","b","d"],['b','d'],['a','b'],['a']]
 """
 for each in range(len(d)):
     d[each][0]="BI-RADS:"+d[each][0]
@@ -22,9 +22,9 @@ df = pd.DataFrame(te_ary,columns=te.columns_)
 #print(df)
 
 #computing frequent itemsets and association rules
-frequent_itemsets = apriori(df, min_support=0.2, use_colnames=True)
+frequent_itemsets = apriori(df, min_support=0.4, use_colnames=True)
 
-a=association_rules(frequent_itemsets, metric="confidence", min_threshold=0.9)
+a=association_rules(frequent_itemsets, metric="confidence", min_threshold=0)
 
 #visualizing association rules results
 print(a[["antecedents","consequents","support","confidence"]])
