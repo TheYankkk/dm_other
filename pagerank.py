@@ -1,14 +1,14 @@
 from numpy import *
 #
 #构造转移矩阵a = array([[0,0,0,1],[0.5,0,0,0],[1/2,1,0,0],[0,0,1,0]],dtype=float)
-a = array([[0,1/2,1],[1,0,0],[0,1/2,0]],dtype=float)
+a = array([[1/2,1/2,0],[1/2,0,0],[0,1/2,1]],dtype=float)
 def transPre(data):
     b = transpose(data) #把矩阵转置
     c = zeros((a.shape),dtype=float)
     #把所有的元素重新分配
     for i in range(a.shape[0]):
         for j in range(a.shape[1]):
-            c[i][j] = data[i][j] / (b[j].sum())
+            c[i][j] = 1 / a.shape[1]
 
     return c
 # print(transPre(a))
@@ -26,8 +26,9 @@ def PageRank(p,m,v):
     #pageRank算法
     #p是网页跳转概率，m是转移矩阵，v是pr值
     i=0
-    while ((v == p*dot(m,v) + (1-p)*v).all() == False):
-        v = p*dot(m,v) + (1-p)*v
+    ori=m
+    while ((v == p*dot(a,v) + (1-p)*ori).all() == False):
+        v = dot(p*a+(1-p)*ori,v)
         # print(v)
         #print((v == p*dot(m,v) + (1-p)*v).all())
 
@@ -43,5 +44,5 @@ def PageRank(p,m,v):
 if __name__ == '__main__':
     M = transPre(a)
     pr = initiPre(M)
-    p = 1#β的值
+    p = 0.8#β的值
     print(PageRank(p,M,pr))
